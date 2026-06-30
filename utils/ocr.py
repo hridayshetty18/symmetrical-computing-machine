@@ -20,7 +20,7 @@ def extract_text_from_image(image_bytes):
     try:
         reader_instance = get_reader()
         if reader_instance is None:
-            return "MOCK TEXT FOR FREE TIER: Amount 50000, PAT1234. (OCR disabled due to server memory limits)"
+            return ""
             
         # EasyOCR can read from bytes directly
         result = reader_instance.readtext(image_bytes, detail=0)
