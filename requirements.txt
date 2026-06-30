@@ -1,0 +1,12 @@
+streamlit
+pandas
+numpy
+scikit-learn
+shap
+easyocr
+networkx
+plotly
+reportlab
+matplotlib
+openpyxl
+jinja2
