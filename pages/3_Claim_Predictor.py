@@ -74,6 +74,10 @@ with col_results:
                     with st.spinner("Extracting text via EasyOCR..."):
                         bytes_data = uploaded_file.getvalue()
                         text = extract_text_from_image(bytes_data)
+                        
+                        if "MOCK TEXT" in text:
+                            st.warning("⚠️ OCR Module is running in Mock Mode because the server lacks the memory to run PyTorch (Render Free Tier limit).")
+                            
                         ocr_result = verify_claim_with_ocr(text, claim_amount, patient_id)
                         
                         if ocr_result["amount_match"]:

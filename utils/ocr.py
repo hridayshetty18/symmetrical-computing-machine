@@ -4,10 +4,13 @@ reader = None
 
 def get_reader():
     global reader
-    import easyocr
-    if reader is None:
-        reader = easyocr.Reader(['en'], gpu=False) # Use CPU for general compatibility
-    return reader
+    try:
+        import easyocr
+        if reader is None:
+            reader = easyocr.Reader(['en'], gpu=False) # Use CPU for general compatibility
+        return reader
+    except ImportError:
+        return None
 
 def extract_text_from_image(image_bytes):
     """
@@ -16,6 +19,9 @@ def extract_text_from_image(image_bytes):
     """
     try:
         reader_instance = get_reader()
+        if reader_instance is None:
+            return "MOCK TEXT FOR FREE TIER: Amount 50000, PAT1234. (OCR disabled due to server memory limits)"
+            
         # EasyOCR can read from bytes directly
         result = reader_instance.readtext(image_bytes, detail=0)
         text = " ".join(result)
